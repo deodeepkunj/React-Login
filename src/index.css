@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.custom-padding {
+  padding-top: 150px;
+}
+
+.custom-eye {
+  right: 18px;
+  position: absolute;
+  top: 45%;
+  bottom: 50%;
+}

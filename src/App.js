@@ -4,13 +4,14 @@ import { Card } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
+import toast, { Toaster } from 'react-hot-toast';
+
 function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [hide, setShow] = useState(true);
   const [agree, setAgree] = useState(false);
   async function handleSubmit(){
-    debugger;
     if (email && password) {
       const res = await fetch("https://reqres.in/api/login", {
         method: "POST",
@@ -22,6 +23,7 @@ function App() {
       const response = await res.json();
       let tok = response.token;
       if(tok && tok.length){
+        toast.success("Successfully LoggedIn..");
         const getUser = await fetch(`https://reqres.in/api/${tok}`, {
           method: "GET",
           headers: {
@@ -30,16 +32,18 @@ function App() {
         })
         const userList = await getUser.json();
         console.log("userList", userList);
+      }else{
+        toast.error("Invalid username /password");
       }
-   
     }
   };
   return (
     <div className="App">
+      <Toaster position="top-center" />
       <div className="wrapper p-4">
-        <div className="col-md-12 text-center p-6">
+        <div className="col-md-12 p-6">
           <div className="col-md-6">
-            <Card className="b-dark border-0">
+            <Card className="border-1">
               <Card.Body className="p-2">
                 <div className="text-center">
                   <img
